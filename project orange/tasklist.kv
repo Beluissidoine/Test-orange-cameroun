@@ -1,0 +1,76 @@
+<EditTaskPopup>:
+    title: 'Modifier la tâche'
+    size_hint: 0.8, 0.4
+    auto_dismiss: False
+    task_widget: None
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 10
+
+        TextInput:
+            id: edit_task_input
+            hint_text: 'Modifier la tâche'
+            multiline: False
+
+        BoxLayout:
+            size_hint_y: None
+            height: '40dp'
+            Button:
+                text: 'Annuler'
+                on_press: root.dismiss()
+            Button:
+                text: 'Sauvegarder'
+                on_press: root.save_task()
+
+<Task>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 40
+    padding: [10, 10]
+
+    Label:
+        text: root.task_text
+        size_hint_x: 0.6
+
+    Button:
+        text: "Modifier"
+        size_hint_x: 0.2
+        on_press: root.open_edit_popup()
+
+    Button:
+        text: "Supprimer"
+        size_hint_x: 0.2
+        on_press: root.remove_task()
+
+<TaskList>:
+    task_input: task_input
+    task_list_layout: task_list_layout
+
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    BoxLayout:
+        size_hint_y: None
+        height: 50
+        TextInput:
+            id: task_input
+            hint_text: 'Entrez une tâche'
+            multiline: False
+            size_hint_x: 0.8
+            padding: [10, 10]
+        Button:
+            text: 'Ajouter'
+            size_hint_x: 0.2
+            on_press: root.add_task()
+
+    ScrollView:
+        BoxLayout:
+            id: task_list_layout
+            orientation: 'vertical'
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: 5
+            padding: [5, 5]
